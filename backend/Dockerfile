@@ -1,7 +1,14 @@
-FROM python:3.8
+FROM python:3.8-slim
+
 WORKDIR /app
-COPY . /backend
-RUN pip install flask
+
+# Copy requirements first (for better Docker caching)
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy the rest of the application
+COPY . .
+
 EXPOSE 8080
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+
+CMD ["python", "app.py"]

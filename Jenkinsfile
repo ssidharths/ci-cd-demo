@@ -9,6 +9,7 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
+                dir('backend')
                 sh '''
                     python3 -m venv venv
                     . venv/bin/activate
@@ -19,6 +20,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
+            dir('backend')
                 sh '''
                     . venv/bin/activate
                     python -m pytest tests/ || echo "No tests found"
