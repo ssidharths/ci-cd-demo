@@ -48,7 +48,7 @@ pipeline {
 
     post {
         always {
-            sh 'docker system prune -f'
+            sh 'docker system prune -f || echo "Docker cleanup failed"'
         }
         success {
             echo 'Pipeline completed successfully!'
