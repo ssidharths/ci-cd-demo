@@ -49,7 +49,7 @@ pipeline {
                 sh '''
                     docker stop flask-app || true
                     docker rm flask-app || true
-                    docker run -d -p 8080:8080 --name flask-app flask-app:latest
+                    docker run -d -p 8081:8080 --name flask-app flask-app:latest
                 '''
                 echo 'Application deployed!'
             }
