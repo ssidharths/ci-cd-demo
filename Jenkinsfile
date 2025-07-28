@@ -27,7 +27,12 @@ pipeline {
                 dir('backend') {
                     sh '''
                         . venv/bin/activate
-                        python -m pytest tests/ || echo "No tests found"
+                        echo "=== Listing test files ==="
+                        find tests/ -name "*.py" -type f
+                        echo "=== Testing pytest discovery ==="
+                        python -m pytest tests/ --collect-only -v
+                        echo "=== Running actual tests ==="
+                        python -m pytest tests/ -v -s
                     '''
                 }
                 echo 'Tests completed!'
